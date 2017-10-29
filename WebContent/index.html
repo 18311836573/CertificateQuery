@@ -31,6 +31,7 @@
             margin-left: 30px;
         }
     </style>
+    <link rel="stylesheet" href="js/bootstrap-table.css">
 
 </head>
 
@@ -48,13 +49,15 @@
     <div class="collapse navbar-collapse" id="navbar-collapse-01">
         <ul class="nav navbar-nav nav-tabs">
             <li class="active"><a href="#index" data-toggle="tab">查询</a></li>
-            <li><a href="#help"  data-toggle="tab">帮助</a></li>
+            <li><a href="#help" data-toggle="tab">帮助</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <img src="./img/icons/log.png" alt="管理员登录" style="width: 20px;height: 20px;cursor: pointer" title="管理员登录"
+                <img src="./img/icons/log.png" alt="管理员登录" style="width: 20px;height: 20px;cursor: pointer"
+                     title="管理员登录"
                      data-toggle="modal" data-target="#log">
-                <span style="color: white;font-size: 14px;cursor: pointer" data-toggle="modal" data-target="#log"title="管理员登录">[未登录]</span>
+                <span style="color: white;font-size: 14px;cursor: pointer" data-toggle="modal" data-target="#log"
+                      title="管理员登录">[未登录]</span>
                 <div class="modal fade" id="log" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -76,8 +79,8 @@
                                                class="form-control">
                                     </div>
                                     <div class="modal-footer">
-	                                    <input type="submit" class="btn btn-primary" id="logIn" value="登陆">
-	                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <input type="submit" class="btn btn-primary" id="logIn" value="登陆">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                                     </div>
                                 </form>
                             </div>
@@ -132,7 +135,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <span style="color: red">*</span><span>作者姓名:</span><br>
-                                    <input type="text" placeholder="多个人名请以一个空格隔开" class="form-control" style="width: 220px"
+                                    <input type="text" placeholder="多个人名请以一个空格隔开" class="form-control"
+                                           style="width: 220px"
                                            id="authorName" name="authorName"/>
                                 </div>
                             </div><!--作者姓名-->
@@ -215,14 +219,16 @@
                                   <h4 class="modal-title">发送邮件</h4>
                                 </div>
                                 <div class="modal-body">
-                                  <form id="e-mail" action="sendMail" >
+                                    <table id="email_table"></table>
+                                  <form id="e-mail" action="sendMail">
                                     <div class="form-group">
                                       <label class="control-label" for="Lemail">收件人：</label>
                                       <form class="form-inline">
                                         <div class="form-group">
                                           <div class="input-group">
                                             <div class="input-group-addon">@</div>
-                                            <input type="text" class="form-control" name="receiveMailAccount" id="Lemail" placeholder="Email">
+                                            <input type="text" class="form-control" name="receiveMailAccount"
+                                                   id="Lemail" placeholder="Email">
                                           </div>
                                         </div>
                                       </form>
@@ -241,15 +247,16 @@
 
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                            <span data-placement="top" data-toggle="tooltip" title="分享" data-original-title="Tooltip on left">
+                            <span data-placement="top" data-toggle="tooltip" title="分享"
+                                  data-original-title="Tooltip on left">
                     <img src="./img/icons/svg/chat.svg"
                          alt="分享"
                          style="width: 30px;height: 30px;cursor:pointer;"
                          title="分享" data-toggle="dropdown" class="dropdown-toggle">
                     <ul class="dropdown-menu" role="menu" id="list">
                         <li><a href="https://qzone.qq.com/" target="_blank"><img src="./img/icons/qq空间.svg"
-                                                                                        alt=""
-                                                                                        style="width: 25px;height: 25px;">&nbsp;&nbsp;分享至QQ空间</a></li>
+                                                                                 alt=""
+                                                                                 style="width: 25px;height: 25px;">&nbsp;&nbsp;分享至QQ空间</a></li>
                         <li><a href="https://weibo.com/" target="_blank"><img src="./img/icons/微博.svg" alt=""
                                                                               style="width: 24px;height: 24px;">&nbsp;&nbsp;分享至微博</a></li>
                         <li><a href="https://wx.qq.com/" target="_blank"><img src="./img/icons/朋友圈.svg" alt=""
@@ -261,22 +268,23 @@
 
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <a href="" target="_blank" id="ahref"><img src="./img/icons/PDF.jpg"
-                                                             alt="浏览证书"
-                                                             style="width: 30px;height: 40px;"
-                                                             id="look"
-                                                             title="浏览证书" data-placement="bottom" data-toggle="tooltip"></a>
-                    <!--PDF证书-->
+                            <a href="" target="_blank" id="ahref"><img src="./img/icons/PDF.jpg"
+                                                                       alt="浏览证书"
+                                                                       style="width: 30px;height: 40px;"
+                                                                       id="look"
+                                                                       title="浏览证书" data-placement="bottom"
+                                                                       data-toggle="tooltip"></a>
+                            <!--PDF证书-->
 
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <a href="http://www.jsjds.org/" target="_blank"><img src="./img/icons/home.png"
-                                                                         alt="大赛官方主页"
-                                                                         style="width: 40px;height: 40px;"
-                                                                         title="大赛官方主页"
-                                                                         data-placement="right"
-                                                                         data-toggle="tooltip"></a>
-                    <!--官方主页-->
+                            <a href="http://www.jsjds.org/" target="_blank"><img src="./img/icons/home.png"
+                                                                                 alt="大赛官方主页"
+                                                                                 style="width: 40px;height: 40px;"
+                                                                                 title="大赛官方主页"
+                                                                                 data-placement="right"
+                                                                                 data-toggle="tooltip"></a>
+                            <!--官方主页-->
 
                         </div><!--icon-->
 
@@ -340,7 +348,7 @@
     });
 </script><!--登录界面validate-->
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#e-mail")
             .bootstrapValidator({
                 message: 'This value is not valid',
@@ -366,7 +374,7 @@
 
 </script><!--邮箱validate-->
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#search")
             .bootstrapValidator({
                 message: 'This value is not valid',
@@ -383,7 +391,7 @@
                             }
                         }
                     },
-                    authorName:{
+                    authorName: {
                         validators: {
                             notEmpty: {
                                 message: '作品姓名不能为空'
@@ -406,142 +414,193 @@
 
 <script type="text/javascript" src="js/jquery.form.js"></script>
 <script>
-$(document).ready(function() {
-	 $("#search").submit(function(){
-         $("#search").ajaxSubmit({
-          dataType : "json",
+    $(document).ready(function () {
+        $("#search").submit(function () {
+            $("#search").ajaxSubmit({
+                dataType: "json",
 //           clearForm : true,
-          success : function(data) {
-             var result = data['result'];
-             if(result == 'false')
-           	  alert("查询失败")
-             else{
-                 $("tbody").html("")
-                 for(var j=0;j<data.p.length;j++){
-                     var k=j+1
-                     $("tbody").append(
-                         "<tr>" +
-                         "<th id=\"number\"></th>" +
-                         "<th></th>" +
-                         "<th></th>" +
-                         "<th></th>" +
-                         "<th></th>" +
-                         "</tr>\n")
-                         $("tr:eq("+k+") th:eq(0)").html(data.p[j].number)
-                         $("tr:eq("+k+") th:eq(1)").html(data.p[j].workname)
-                         $("tr:eq("+k+") th:eq(2)").html(data.p[j].level)
-                         $("tr:eq("+k+") th:eq(3)").html(data.p[j].student1)
-                         $("tr:eq("+k+") th:eq(3)").append('<br>')
-                         $("tr:eq("+k+") th:eq(3)").append(data.p[j].student2)
-                         $("tr:eq("+k+") th:eq(3)").append('<br>')
-                         $("tr:eq("+k+") th:eq(3)").append(data.p[j].student3)
-                         $("tr:eq("+k+") th:eq(3)").append('<br>')
-                         $("tr:eq("+k+") th:eq(4)").html(data.p[j].teacher1)
-                         $("tr:eq("+k+") th:eq(4)").append('<br>')
-                         $("tr:eq("+k+") th:eq(4)").append(data.p[j].teacher2)
-                         $("tr:eq("+k+") th:eq(4)").append('<br>')
-                 }
-                 $("#Loading").empty("div")
-             }
-              return false;
-          }
-      });
-		return false;
-     });
-});
+                success: function (data) {
+                    var result = data['result'];
+                    if (result == 'false')
+                        alert("查询失败")
+                    else {
+                        $("tbody").html("")
+                        for (var j = 0; j < data.p.length; j++) {
+                            var k = j + 1
+                            $("tbody").append(
+                                "<tr>" +
+                                "<th id=\"number\"></th>" +
+                                "<th></th>" +
+                                "<th></th>" +
+                                "<th></th>" +
+                                "<th></th>" +
+                                "</tr>\n")
+                            $("tr:eq(" + k + ") th:eq(0)").html(data.p[j].number)
+                            $("tr:eq(" + k + ") th:eq(1)").html(data.p[j].workname)
+                            $("tr:eq(" + k + ") th:eq(2)").html(data.p[j].level)
+                            $("tr:eq(" + k + ") th:eq(3)").html(data.p[j].student1)
+                            $("tr:eq(" + k + ") th:eq(3)").append('<br>')
+                            $("tr:eq(" + k + ") th:eq(3)").append(data.p[j].student2)
+                            $("tr:eq(" + k + ") th:eq(3)").append('<br>')
+                            $("tr:eq(" + k + ") th:eq(3)").append(data.p[j].student3)
+                            $("tr:eq(" + k + ") th:eq(3)").append('<br>')
+                            $("tr:eq(" + k + ") th:eq(4)").html(data.p[j].teacher1)
+                            $("tr:eq(" + k + ") th:eq(4)").append('<br>')
+                            $("tr:eq(" + k + ") th:eq(4)").append(data.p[j].teacher2)
+                            $("tr:eq(" + k + ") th:eq(4)").append('<br>')
+                        }
+                        $("#email_table").bootstrapTable({
+                            data:data,
+                            clickToSelect: true,
+                            columns: [
+                                {
+                                    checkbox: true
+                                },
+                                {
+                                    field: "number",
+                                    title: "作品编号",
+                                    align: "center"
+                                },
+                                {
+                                    field: "area",
+                                    title: "赛区",
+                                    align: "center"
+                                },
+                                {
+                                    field: "workName",
+                                    title: "作品名",
+                                    align: "center"
+                                },
+                                {
+                                    field: "level",
+                                    title: "奖项",
+                                    align: "center"
+                                },
+                                {
+                                    field: "student",
+                                    title: "作者姓名",
+                                    align: "center"
+                                },
+                                {
+                                    field: "teacher",
+                                    title: "指导老师",
+                                    align: "center"
+                                },
+                                {
+                                    field: "school",
+                                    title: "学校",
+                                    align: "center"
+                                }
+                            ]
+                        })
+                        $("#Loading").empty("div")
+                    }
+                    return false;
+                }
+            });
+            return false;
+        });
+    });
 </script><!--查询表格AJAX-->
 
 <script>
-$(document).ready(function() {
-	
-	 $("#login_form").submit(function(){
-		var username = $("#username").val();
-     	var password = $("#password").val();
-	  	if(username ==""){
-       	alert("请输入用户名");
-			return false;
-		}
-		if(password ==""){
-			alert("请输入密码");
-		
-			return false;
-		}
-		$("#login_form").ajaxSubmit({
-           dataType : "json",
-           clearForm : true,
-           success : function(data) {
-               if (data['result'] === 'false') {
-                   alert('登录失败，用户名或密码错误');
-                   return false;
-               }
-               else {
-               	 window.location.href = "controller.html";
-               	 document.cookie = data.account
-               	 return true;
-               }
-               
-           }
-       });
-		return false;
-     });
-});
-//     $("#login_form").submit(function () {
-//         $("#login_form").post('../../LoginServlet',function (data) {
-//             if(data['result'] === 'true'){
-//             	alert("登陆成功")
-//                 window.location.href="controller.html";
-//                 return true;
-//             }else{
-//             	alert("用户名或密码错误");
-//             	return false;
-//             }
-//         })
-//     	return false;
-//     })
+    $(document).ready(function () {
+
+        $("#login_form").submit(function () {
+            var username = $("#username").val();
+            var password = $("#password").val();
+            if (username == "") {
+                alert("请输入用户名");
+                return false;
+            }
+            if (password == "") {
+                alert("请输入密码");
+
+                return false;
+            }
+            $("#login_form").ajaxSubmit({
+                dataType: "json",
+                clearForm: true,
+                success: function (data) {
+                    if (data['result'] === 'false') {
+                        alert('登录失败，用户名或密码错误');
+                        return false;
+                    }
+                    else {
+                        window.location.href = "controller.html";
+                        document.cookie = data.account
+                        return true;
+                    }
+
+                }
+            });
+            return false;
+        });
+    });
+    //     $("#login_form").submit(function () {
+    //         $("#login_form").post('../../LoginServlet',function (data) {
+    //             if(data['result'] === 'true'){
+    //             	alert("登陆成功")
+    //                 window.location.href="controller.html";
+    //                 return true;
+    //             }else{
+    //             	alert("用户名或密码错误");
+    //             	return false;
+    //             }
+    //         })
+    //     	return false;
+    //     })
 </script><!--管理员登录AJAX-->
 
 <script>
     $(function () {
         $("#research").click(function () {
             $("#Loading").html(
-                "<div class=\"loader-outter\"></div>\n"+
+                "<div class=\"loader-outter\"></div>\n" +
                 "<div class=\"loader-inner\"></div>\n"
             )
         })
     })
 </script>
-         <div class="loader loader-1" style="bottom: 250px;left: 590px;" id="Loading">
-         </div>
+<div class="loader loader-1" style="bottom: 250px;left: 590px;" id="Loading">
+</div>
 <script>
     $(function () {
         $("#look").click(function () {
-            $("#ahref").attr("href","download?number="+$("th#number").text())
+            $("#ahref").attr("href", "download?number=" + $("th#number").text())
         })
     })
 </script><!--PDF浏览-->
 
 <script>
-     $("#send").click(function () {
+    $("#send").click(function () {
         var info = {
-          number : $("th#number").text(),
+            number: $("th#number").text(),
         };
-         $("#e-mail").ajaxSubmit({
-             data: info,
-             dataType: "json",
-             clearForm: true,
-             success: function(data) {
-               if (data['result'] === 'false') {
-                   alert('发送失败');
-                   return false;
-               }
-               else {
-               	 alert('发送成功')
-               	 return true;
-               }
-               
-           }
-         })
-     })
+        $("#e-mail").ajaxSubmit({
+            data: info,
+            dataType: "json",
+            clearForm: true,
+            success: function (data) {
+                if (data['result'] === 'false') {
+                    alert('发送失败');
+                    return false;
+                }
+                else {
+                    alert('发送成功')
+                    return true;
+                }
+
+            }
+        })
+    })
 </script><!--email address-->
+
+<script src="js/bootstrap-table.js"></script>
+<script src="js/bootstrap-table-zh-CN.js"></script>
+<script src="js/bootstrap-editable.js"></script>
+<script src="js/MyToolbar.js"></script>
+
+
 </body>
 </html>
