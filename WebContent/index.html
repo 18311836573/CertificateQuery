@@ -1,0 +1,547 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>中国大学生计算机设计大赛结果查询</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/vendor/js/bootstrap.js"></script>
+
+    <!--Loading BootstrapValidate-->
+    <link rel="stylesheet" href="./css/validate css/bootstrapValidator.min.css">
+
+    <!--Loading loading-->
+    <link rel="stylesheet" href="css/loader.css">
+
+    <!-- Loading Flat UI -->
+    <link href="./css/flat-ui.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .bnt {
+            margin-left: 30px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="logo" style="
+                                                    width:auto;
+                                                    height:auto;
+                                                    max-width:100%;
+                                                    max-height:100%;">中国大学生计算机设计大赛结果查询</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <ul class="nav navbar-nav nav-tabs">
+            <li class="active"><a href="#index" data-toggle="tab">查询</a></li>
+            <li><a href="#help"  data-toggle="tab">帮助</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <img src="./img/icons/log.png" alt="管理员登录" style="width: 20px;height: 20px;cursor: pointer" title="管理员登录"
+                     data-toggle="modal" data-target="#log">
+                <span style="color: white;font-size: 14px;cursor: pointer" data-toggle="modal" data-target="#log"title="管理员登录">[未登录]</span>
+                <div class="modal fade" id="log" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">管理员登录</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="login_form" method="post" action="login">
+                                    <div class="form-group">
+                                        <label for="username" class="control-label">账号：</label>
+                                        <input type="text" class="form-control" id="username" name="username"
+                                               placeholder="请输入您的管理员账号"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="control-label">密码：</label>
+                                        <input type="password" placeholder="请输入您的密码" id="password" name="password"
+                                               class="form-control">
+                                    </div>
+                                    <div class="modal-footer">
+	                                    <input type="submit" class="btn btn-primary" id="logIn" value="登陆">
+	                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav><!-- /navbar -->
+
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="index">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-1">
+                    <form action="query" method="get" id="search">
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span style="color: red">*</span>请选择作品参赛年份：&nbsp;&nbsp;&nbsp;
+                                    <div class="btn-group">
+                                        <select data-toggle="select" class="form-control select select-inverse mrs mbm"
+                                                id="year" name="year">
+                                            <option value="2017">2017</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2015">2015</option>
+                                            <option value="2014">2014</option>
+                                            <option value="2013">2013</option>
+                                            <option value="2012">2012</option>
+                                            <option value="2011">2011</option>
+                                            <option value="2010">2010</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div><!--参赛年份-->
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <span style="color: red">*</span><span>作品名:</span><br>
+                                    <input type="text" placeholder="请输入您的作品名" class="form-control" style="width: 220px"
+                                           id="workName" name="workName"/>
+                                </div>
+                            </div><!--作品名-->
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span style="color: red">*</span><span>作者姓名:</span><br>
+                                    <input type="text" placeholder="多个人名请以一个空格隔开" class="form-control" style="width: 220px"
+                                           id="authorName" name="authorName"/>
+                                </div>
+                            </div><!--作者姓名-->
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <span>作品编号:</span><br>
+                                    <input type="text" placeholder="请输入您的作品编号" class="form-control" style="width: 220px"
+                                           id="workId" name="workId"/>
+                                </div>
+                            </div><!--作品编号-->
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <span>学校:</span><br>
+                                    <input type="text" placeholder="请输入您的学校" class="form-control" style="width: 220px"
+                                           id="school" name="school"/>
+                                </div>
+                            </div><!--学校-->
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-2 bnt">
+                                    <input class="btn btn-success" id="research" type="submit" value="查询">
+                                    &nbsp;
+                                    <button class="btn btn-info" type="reset">重置</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div><!--查询表单-->
+
+                <div class="col-md-6 col-md-offset-1">
+
+                    <div class="row">
+
+                        <br>
+
+                        <div class="table-responsive">
+                            <table class="table">
+
+                                <thead>
+                                <tr>
+                                    <th>作品编号</th>
+                                    <th>作品名</th>
+                                    <th>奖项</th>
+                                    <th>作者</th>
+                                    <th>指导老师</th>
+                                </tr>
+                                </thead>
+
+                                <tbody style="font-size: 15px;font-family: 宋体;color: black;">
+                                <tr id="tbody">
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div><!--结果展示表格-->
+
+                        <br>
+
+                        <div class="col-md-8">
+                    <span data-toggle="tooltip" data-placement="left" title="将PDF以邮件发送">
+                    <img src="./img/icons/svg/mail.svg"
+                         alt="以邮件发送"
+                         style="width: 30px;height: 30px;cursor:pointer;"
+                         data-toggle="modal" data-target="#email">
+                          <div class="modal fade" id="email" tabindex="-1" role="dialog"
+                               aria-labelledby="emailLabel">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                          aria-hidden="true">&times;</span></button>
+                                  <h4 class="modal-title">发送邮件</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <form id="e-mail" action="sendMail" >
+                                    <div class="form-group">
+                                      <label class="control-label" for="Lemail">收件人：</label>
+                                      <form class="form-inline">
+                                        <div class="form-group">
+                                          <div class="input-group">
+                                            <div class="input-group-addon">@</div>
+                                            <input type="text" class="form-control" name="receiveMailAccount" id="Lemail" placeholder="Email">
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                  <button type="button" class="btn btn-primary" id="send">发送</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div><!--model框-->
+
+                    </span><!--邮件-->
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <span data-placement="top" data-toggle="tooltip" title="分享" data-original-title="Tooltip on left">
+                    <img src="./img/icons/svg/chat.svg"
+                         alt="分享"
+                         style="width: 30px;height: 30px;cursor:pointer;"
+                         title="分享" data-toggle="dropdown" class="dropdown-toggle">
+                    <ul class="dropdown-menu" role="menu" id="list">
+                        <li><a href="https://qzone.qq.com/" target="_blank"><img src="./img/icons/qq空间.svg"
+                                                                                        alt=""
+                                                                                        style="width: 25px;height: 25px;">&nbsp;&nbsp;分享至QQ空间</a></li>
+                        <li><a href="https://weibo.com/" target="_blank"><img src="./img/icons/微博.svg" alt=""
+                                                                              style="width: 24px;height: 24px;">&nbsp;&nbsp;分享至微博</a></li>
+                        <li><a href="https://wx.qq.com/" target="_blank"><img src="./img/icons/朋友圈.svg" alt=""
+                                                                              style="width: 24px;height: 24px;">&nbsp;&nbsp;分享至朋友圈</a></li>
+                        <li><a href="https://www.twitter.com/" target="_blank"><img src="./img/icons/twitter.svg" alt=""
+                                                                                    style="width: 25px;height: 25px;">&nbsp;&nbsp;分享至Twitter</a></li>
+                    </ul>
+                    </span><!--分享-->
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <a href="" target="_blank" id="ahref"><img src="./img/icons/PDF.jpg"
+                                                             alt="浏览证书"
+                                                             style="width: 30px;height: 40px;"
+                                                             id="look"
+                                                             title="浏览证书" data-placement="bottom" data-toggle="tooltip"></a>
+                    <!--PDF证书-->
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <a href="http://www.jsjds.org/" target="_blank"><img src="./img/icons/home.png"
+                                                                         alt="大赛官方主页"
+                                                                         style="width: 40px;height: 40px;"
+                                                                         title="大赛官方主页"
+                                                                         data-placement="right"
+                                                                         data-toggle="tooltip"></a>
+                    <!--官方主页-->
+
+                        </div><!--icon-->
+
+                    </div>
+                </div><!--PDF证书展示-->
+            </div>
+        </div><!--查询container-->
+
+    </div><!--index界面-->
+
+    <div class="tab-pane fade" id="help">
+
+        <div class="jumbotron">
+            <h1>Welcome!</h1>
+            <p>This page is considered to help participants.</p>
+            <p><a class="btn btn-primary btn-lg" href="index.html" role="button">去查询</a></p>
+        </div>
+
+    </div><!--帮助界面-->
+</div><!--tab分页container-->
+
+<script src="js/vendor/jquery.min.js"></script>
+<script src="css/validate js/bootstrapValidator.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#login_form")
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    username: {
+                        message: '用户名无效',
+                        validators: {
+                            notEmpty: {
+                                message: '账号不能为空'
+                            },
+                            stringLength: {
+                                min: 2,
+                                max: 30,
+                                message: '用户名必须由 2~30 个字符组成'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '用户名只能由字母、数字、点和下划线组成'
+                            }
+                        }
+                    },
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            }
+                        }
+                    }
+                }
+            })
+    });
+</script><!--登录界面validate-->
+<script>
+    $(document).ready(function() {
+        $("#e-mail")
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: '邮箱地址不能为空'
+                            },
+                            emailAddress: {
+                                message: '无效的邮箱地址'
+                            }
+                        }
+                    }
+                }
+            })
+    });
+
+</script><!--邮箱validate-->
+<script>
+    $(document).ready(function() {
+        $("#search")
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    workName: {
+                        validators: {
+                            notEmpty: {
+                                message: '作品姓名不能为空'
+                            }
+                        }
+                    },
+                    authorName:{
+                        validators: {
+                            notEmpty: {
+                                message: '作品姓名不能为空'
+                            }
+                        }
+                    }
+                }
+            })
+    });
+</script><!--查询表单validate-->
+<script src="js/flat-ui.min.js"></script>
+<script src="js/application.js"></script>
+<script src="js/prettify.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle=tooltip]').tooltip();
+    });
+</script>
+
+
+<script type="text/javascript" src="js/jquery.form.js"></script>
+<script>
+$(document).ready(function() {
+	 $("#search").submit(function(){
+         $("#search").ajaxSubmit({
+          dataType : "json",
+//           clearForm : true,
+          success : function(data) {
+             var result = data['result'];
+             if(result == 'false')
+           	  alert("查询失败")
+             else{
+                 $("tbody").html("")
+                 for(var j=0;j<data.p.length;j++){
+                     var k=j+1
+                     $("tbody").append(
+                         "<tr>" +
+                         "<th id=\"number\"></th>" +
+                         "<th></th>" +
+                         "<th></th>" +
+                         "<th></th>" +
+                         "<th></th>" +
+                         "</tr>\n")
+                         $("tr:eq("+k+") th:eq(0)").html(data.p[j].number)
+                         $("tr:eq("+k+") th:eq(1)").html(data.p[j].workname)
+                         $("tr:eq("+k+") th:eq(2)").html(data.p[j].level)
+                         $("tr:eq("+k+") th:eq(3)").html(data.p[j].student1)
+                         $("tr:eq("+k+") th:eq(3)").append('<br>')
+                         $("tr:eq("+k+") th:eq(3)").append(data.p[j].student2)
+                         $("tr:eq("+k+") th:eq(3)").append('<br>')
+                         $("tr:eq("+k+") th:eq(3)").append(data.p[j].student3)
+                         $("tr:eq("+k+") th:eq(3)").append('<br>')
+                         $("tr:eq("+k+") th:eq(4)").html(data.p[j].teacher1)
+                         $("tr:eq("+k+") th:eq(4)").append('<br>')
+                         $("tr:eq("+k+") th:eq(4)").append(data.p[j].teacher2)
+                         $("tr:eq("+k+") th:eq(4)").append('<br>')
+                 }
+                 $("#Loading").empty("div")
+             }
+              return false;
+          }
+      });
+		return false;
+     });
+});
+</script><!--查询表格AJAX-->
+
+<script>
+$(document).ready(function() {
+	
+	 $("#login_form").submit(function(){
+		var username = $("#username").val();
+     	var password = $("#password").val();
+	  	if(username ==""){
+       	alert("请输入用户名");
+			return false;
+		}
+		if(password ==""){
+			alert("请输入密码");
+		
+			return false;
+		}
+		$("#login_form").ajaxSubmit({
+           dataType : "json",
+           clearForm : true,
+           success : function(data) {
+               if (data['result'] === 'false') {
+                   alert('登录失败，用户名或密码错误');
+                   return false;
+               }
+               else {
+               	 window.location.href = "controller.html";
+               	 document.cookie = data.account
+               	 return true;
+               }
+               
+           }
+       });
+		return false;
+     });
+});
+//     $("#login_form").submit(function () {
+//         $("#login_form").post('../../LoginServlet',function (data) {
+//             if(data['result'] === 'true'){
+//             	alert("登陆成功")
+//                 window.location.href="controller.html";
+//                 return true;
+//             }else{
+//             	alert("用户名或密码错误");
+//             	return false;
+//             }
+//         })
+//     	return false;
+//     })
+</script><!--管理员登录AJAX-->
+
+<script>
+    $(function () {
+        $("#research").click(function () {
+            $("#Loading").html(
+                "<div class=\"loader-outter\"></div>\n"+
+                "<div class=\"loader-inner\"></div>\n"
+            )
+        })
+    })
+</script>
+         <div class="loader loader-1" style="bottom: 250px;left: 590px;" id="Loading">
+         </div>
+<script>
+    $(function () {
+        $("#look").click(function () {
+            $("#ahref").attr("href","download?number="+$("th#number").text())
+        })
+    })
+</script><!--PDF浏览-->
+
+<script>
+     $("#send").click(function () {
+        var info = {
+          number : $("th#number").text(),
+        };
+         $("#e-mail").ajaxSubmit({
+             data: info,
+             dataType: "json",
+             clearForm: true,
+             success: function(data) {
+               if (data['result'] === 'false') {
+                   alert('发送失败');
+                   return false;
+               }
+               else {
+               	 alert('发送成功')
+               	 return true;
+               }
+               
+           }
+         })
+     })
+</script><!--email address-->
+</body>
+</html>

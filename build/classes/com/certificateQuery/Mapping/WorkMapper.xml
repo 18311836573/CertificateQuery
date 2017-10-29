@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.certificateQuery.dao.WorkDao">
+
+	<!-- 查找 -->
+	<select id="findWork" resultType="com.certificateQuery.model.WorkBean">
+		select * from workTbl where year=#{param1}
+		<if test='param3 != "" '>
+			and workname = #{param3}
+		</if>
+		<if test='param5 != "" and param6 != "" and param7 !="" '>
+			and (student1 in (#{param5},#{param6},#{param7}) or
+			student2 in
+			(#{param5},#{param6},#{param7}) or
+			student3 in
+			(#{param5},#{param6},#{param7}))
+		</if>
+		<if test='param2 != "" '>
+			and number = #{param2}
+		</if>
+		<if test=' param4 != "" '>
+			and school = #{param4}
+		</if>
+	</select>
+
+	<select id="findMaxNumber" resultType="java.lang.Long">
+			select Max(number) from workTbl
+	</select>
+	
+	<select id="findWorkByNumber" resultType="com.certificateQuery.model.WorkBean" parameterType="java.lang.String">
+		select * from workTbl where number = #{number}
+	</select>
+
+	<!-- 插入 -->
+	<insert id="insertWorks" parameterType="java.util.List">
+
+		insert into workTbl(
+		year,month,
+		area,level,school,
+		number,workid,workname,
+		student1,student1Id,
+		student2,student2id,
+		student3,student3Id,
+		teacher1,teacher1Id,
+		teacher2,teacher2Id) values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.year,jdbcType=INTEGER},#{item.month,jdbcType=INTEGER},
+			#{item.area,jdbcType=VARCHAR},#{item.level,jdbcType=VARCHAR},#{item.school,jdbcType=VARCHAR},
+			#{item.number,jdbcType=VARCHAR},#{item.workid,jdbcType=VARCHAR},#{item.workname,jdbcType=VARCHAR},
+			#{item.student1,jdbcType=VARCHAR},#{item.student1Id,jdbcType=VARCHAR},
+			#{item.student2,jdbcType=VARCHAR},#{item.student2Id,jdbcType=VARCHAR},
+			#{item.student3,jdbcType=VARCHAR},#{item.student3Id,jdbcType=VARCHAR},
+			#{item.teacher1,jdbcType=VARCHAR},#{item.teacher1Id,jdbcType=VARCHAR},
+			#{item.teacher2,jdbcType=VARCHAR},#{item.teacher2Id,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+
+	<insert id="insertWork" parameterType="com.certificateQuery.model.WorkBean">
+		insert into workTbl(
+		year,month,
+		area,level,school,
+		number,workid,workname,
+		student1,student1Id,
+		student2,student2id,
+		student3,student3Id,
+		teacher1,teacher1Id,
+		teacher2,teacher2Id) values
+		(#{year,jdbcType=INTEGER},#{month,jdbcType=INTEGER},
+		#{area,jdbcType=VARCHAR},#{level,jdbcType=VARCHAR},#{school,jdbcType=VARCHAR},
+		#{number,jdbcType=VARCHAR},#{workid,jdbcType=VARCHAR},#{workname,jdbcType=VARCHAR},
+		#{student1,jdbcType=VARCHAR},#{student1Id,jdbcType=VARCHAR},
+		#{student2,jdbcType=VARCHAR},#{student2Id,jdbcType=VARCHAR},
+		#{student3,jdbcType=VARCHAR},#{student3Id,jdbcType=VARCHAR},
+		#{teacher1,jdbcType=VARCHAR},#{teacher1Id,jdbcType=VARCHAR},
+		#{teacher2,jdbcType=VARCHAR},#{teacher2Id,jdbcType=VARCHAR})
+	</insert>
+	<!-- 删除 -->
+	<delete id="deleteWork" parameterType="java.util.List">
+		delete from workTbl where number in
+		<foreach collection="list" item="item" index="index" open="("
+			close=")" separator=",">
+			#{item.number}
+		</foreach>
+	</delete>
+
+	<!-- 更新 -->
+	<update id="updateWork" parameterType="com.certificateQuery.model.WorkBean">
+		<!-- <foreach collection="list" item="item" index="index"> -->
+		<!-- update workTbl -->
+		<!-- set -->
+		<!-- year=#{item.year,jdbcType=INTEGER},month=#{item.month,jdbcType=INTEGER}, -->
+		<!-- area=#{item.area,jdbcType=VARCHAR},level=#{item.level,jdbcType=VARCHAR},school=#{item.school,jdbcType=VARCHAR}, -->
+		<!-- workid=#{item.workid,jdbcType=VARCHAR},workname=#{item.workname,jdbcType=VARCHAR}, -->
+		<!-- student1=#{item.student1,jdbcType=VARCHAR},student1Id=#{item.student1Id,jdbcType=VARCHAR}, -->
+		<!-- student2=#{item.student2,jdbcType=VARCHAR},student2Id=#{item.student2Id,jdbcType=VARCHAR}, -->
+		<!-- student3=#{item.student3,jdbcType=VARCHAR},student3Id=#{item.student3Id,jdbcType=VARCHAR}, -->
+		<!-- teacher1=#{item.teacher1,jdbcType=VARCHAR},teacher1Id=#{item.teacher1Id,jdbcType=VARCHAR}, -->
+		<!-- teacher2=#{item.teacher2,jdbcType=VARCHAR},teacher2Id=#{item.teacher2Id,jdbcType=VARCHAR} -->
+		<!-- where number=#{item.number,jdbcType=VARCHAR} -->
+		update workTbl
+		set
+		year=#{year,jdbcType=INTEGER},month=#{month,jdbcType=INTEGER},
+		area=#{area,jdbcType=VARCHAR},level=#{level,jdbcType=VARCHAR},school=#{school,jdbcType=VARCHAR},
+		workid=#{workid,jdbcType=VARCHAR},workname=#{workname,jdbcType=VARCHAR},
+		student1=#{student1,jdbcType=VARCHAR},student1Id=#{student1Id,jdbcType=VARCHAR},
+		student2=#{student2,jdbcType=VARCHAR},student2Id=#{student2Id,jdbcType=VARCHAR},
+		student3=#{student3,jdbcType=VARCHAR},student3Id=#{student3Id,jdbcType=VARCHAR},
+		teacher1=#{teacher1,jdbcType=VARCHAR},teacher1Id=#{teacher1Id,jdbcType=VARCHAR},
+		teacher2=#{teacher2,jdbcType=VARCHAR},teacher2Id=#{teacher2Id,jdbcType=VARCHAR}
+		where number=#{number,jdbcType=VARCHAR}
+		<!-- </foreach> -->
+	</update>
+</mapper>
