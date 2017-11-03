@@ -53,7 +53,7 @@
                 <span style="color: white;font-size: 14px;cursor: pointer;" id="admin" data-toggle="dropdown"></span>
                 <ul class="dropdown-menu" role="menu" style="color: white">
                     <li><a href="#tab_information" data-toggle="tab" id="information">我的信息</a></li>
-                    <li><a href="index.html" id="log_out">登出</a></li>
+                    <li><a href="" id="log_out">登出</a></li>
                 </ul>
             </li>
         </ul>
@@ -734,7 +734,18 @@
         $("#admin").html(account)
     })
 </script><!--管理员账户-->
-
+<script>
+    $(function () {
+        $("#log_out").click(function () {
+            $.ajax({
+                url:"/logout",
+                success:function () {
+                    window.location = "index.html"
+                }
+            })
+        })
+    })
+</script><!--登出-->
 <!--<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>-->
 <script type="text/javascript" src="js/jquery.form.js"></script>
 <script>
@@ -754,6 +765,7 @@
             }
 
             $("#file_form").ajaxSubmit({
+                url:"/upload",
                 dataType: "json",
                 resetForm: true,
                 success: function (data) {
@@ -778,6 +790,7 @@
     $(document).ready(function () {
         $("#search").submit(function () {
             $("#search").ajaxSubmit({
+                url:"/query",
                 dataType: "json",
 //	           clearForm : true,
                 success: function (data) {
@@ -854,6 +867,7 @@
             number: $("th#number").text(),
         };
         $("#e-mail").ajaxSubmit({
+            url:"/sendMail",
             data: info,
             dataType: "json",
             clearForm: true,
@@ -881,163 +895,173 @@
 
 <script>
     $(function () {
-        $("#table").bootstrapTable({
-            url: '',
-            search: true,
-            searchAlign: 'right',
-            toolbar: '#toolbar',
-            pagination: true,
-            pageSize: 10,
-            pageList: [10, 25, 50, 100],
-            showToggle: true,
-            showColumns: true,
-            clickToSelect: true,
-            columns: [
-                {
-                    checkbox: true
-                },
-                {
-                    field: "number",
-                    title: "作品编号",
-                    align: "center"
-                },
-                {
-                    field: "area",
-                    title: "赛区",
-                    align: "center",
-                    editable: {
-                        type: 'select',
-                        title: '赛区',
-                        toggle: 'click',
-                        source: [
-                            {value: "上海", text: "上海"},
-                            {value: "江苏", text: "江苏"},
-                            {value: "山东", text: "山东"},
-                            {value: "四川", text: "四川"},
-                            {value: "浙江", text: "浙江"},
-                            {value: "安徽", text: "安徽"},
-                            {value: "福建", text: "福建"},
-                            {value: "江西", text: "江西"},
-                            {value: "广东", text: "广东"},
-                            {value: "广西", text: "广西"},
-                            {value: "海南", text: "海南"},
-                            {value: "湖南", text: "湖南"},
-                            {value: "湖北", text: "湖北"},
-                            {value: "北京", text: "北京"},
-                            {value: "河南", text: "河南"},
-                            {value: "天津", text: "天津"},
-                            {value: "河北", text: "河北"},
-                            {value: "山西", text: "山西"},
-                            {value: "内蒙古", text: "内蒙古"},
-                            {value: "青海", text: "青海"},
-                            {value: "陕西", text: "陕西"},
-                            {value: "宁夏", text: "宁夏"},
-                            {value: "甘肃", text: "甘肃"},
-                            {value: "新疆", text: "新疆"},
-                            {value: "贵州", text: "贵州"},
-                            {value: "云南", text: "云南"},
-                            {value: "重庆", text: "重庆"},
-                            {value: "西藏", text: "西藏"},
-                            {value: "辽宁", text: "辽宁"},
-                            {value: "吉林", text: "吉林"},
-                            {value: "黑龙江", text: "黑龙江"},
-                            {value: "香港", text: "香港"},
-                            {value: "澳门", text: "澳门"},
-                            {value: "台湾", text: "台湾"}
-                        ],
-                        validate: function (v) {
-                            if (!v) return '赛区不能为空';
+        $.ajax({
+            type: "get",
+            url: "/query",
+            data:{
+              result:"true"
+            },
+            dataType: 'JSON',
+            success:function (data) {
+                $("#table").bootstrapTable({
+                    url: data,
+                    search: true,
+                    searchAlign: 'right',
+                    toolbar: '#toolbar',
+                    pagination: true,
+                    pageSize: 10,
+                    pageList: [10, 25, 50, 100],
+                    showToggle: true,
+                    showColumns: true,
+                    clickToSelect: true,
+                    columns: [
+                        {
+                            checkbox: true
                         },
-                        emptytext: "-"
-                    }
-                },
-                {
-                    field: "workName",
-                    title: "作品名",
-                    align: "center",
-                    editable: {
-                        type: 'text',
-                        title: '作品名',
-                        toggle: 'click',
-                        validate: function (v) {
-                            if (!v) return '作品名不能为空';
+                        {
+                            field: "number",
+                            title: "作品编号",
+                            align: "center"
                         },
-                        emptytext: "-"
-                    }
-                },
-                {
-                    field: "level",
-                    title: "奖项",
-                    align: "center",
-                    editable: {
-                        type: 'select',
-                        title: '奖项',
-                        toggle: 'click',
-                        source: [
-                            {value: "特等奖", text: "特等奖"},
-                            {value: "一等奖", text: "一等奖"},
-                            {value: "二等奖", text: "二等奖"},
-                            {value: "三等奖", text: "三等奖"}
-                        ],
-                        validate: function (v) {
-                            if (!v) return '奖项不能为空';
+                        {
+                            field: "area",
+                            title: "赛区",
+                            align: "center",
+                            editable: {
+                                type: 'select',
+                                title: '赛区',
+                                toggle: 'click',
+                                source: [
+                                    {value: "上海", text: "上海"},
+                                    {value: "江苏", text: "江苏"},
+                                    {value: "山东", text: "山东"},
+                                    {value: "四川", text: "四川"},
+                                    {value: "浙江", text: "浙江"},
+                                    {value: "安徽", text: "安徽"},
+                                    {value: "福建", text: "福建"},
+                                    {value: "江西", text: "江西"},
+                                    {value: "广东", text: "广东"},
+                                    {value: "广西", text: "广西"},
+                                    {value: "海南", text: "海南"},
+                                    {value: "湖南", text: "湖南"},
+                                    {value: "湖北", text: "湖北"},
+                                    {value: "北京", text: "北京"},
+                                    {value: "河南", text: "河南"},
+                                    {value: "天津", text: "天津"},
+                                    {value: "河北", text: "河北"},
+                                    {value: "山西", text: "山西"},
+                                    {value: "内蒙古", text: "内蒙古"},
+                                    {value: "青海", text: "青海"},
+                                    {value: "陕西", text: "陕西"},
+                                    {value: "宁夏", text: "宁夏"},
+                                    {value: "甘肃", text: "甘肃"},
+                                    {value: "新疆", text: "新疆"},
+                                    {value: "贵州", text: "贵州"},
+                                    {value: "云南", text: "云南"},
+                                    {value: "重庆", text: "重庆"},
+                                    {value: "西藏", text: "西藏"},
+                                    {value: "辽宁", text: "辽宁"},
+                                    {value: "吉林", text: "吉林"},
+                                    {value: "黑龙江", text: "黑龙江"},
+                                    {value: "香港", text: "香港"},
+                                    {value: "澳门", text: "澳门"},
+                                    {value: "台湾", text: "台湾"}
+                                ],
+                                validate: function (v) {
+                                    if (!v) return '赛区不能为空';
+                                },
+                                emptytext: "-"
+                            }
                         },
-                        emptytext: "-"
-                    }
-                },
-                {
-                    field: "student",
-                    title: "作者姓名",
-                    align: "center",
-                    editable: {
-                        type: 'text',
-                        title: '作者姓名',
-                        toggle: 'click',
-                        validate: function (v) {
-                            if (!v) return '作者姓名不能为空';
+                        {
+                            field: "workName",
+                            title: "作品名",
+                            align: "center",
+                            editable: {
+                                type: 'text',
+                                title: '作品名',
+                                toggle: 'click',
+                                validate: function (v) {
+                                    if (!v) return '作品名不能为空';
+                                },
+                                emptytext: "-"
+                            }
                         },
-                        emptytext: "-"
-                    }
-                },
-                {
-                    field: "teacher",
-                    title: "指导老师",
-                    align: "center",
-                    editable: {
-                        type: 'text',
-                        title: '指导老师',
-                        toggle: 'click',
-                        validate: function (v) {
-                            if (!v) return '指导老师不能为空';
+                        {
+                            field: "level",
+                            title: "奖项",
+                            align: "center",
+                            editable: {
+                                type: 'select',
+                                title: '奖项',
+                                toggle: 'click',
+                                source: [
+                                    {value: "特等奖", text: "特等奖"},
+                                    {value: "一等奖", text: "一等奖"},
+                                    {value: "二等奖", text: "二等奖"},
+                                    {value: "三等奖", text: "三等奖"}
+                                ],
+                                validate: function (v) {
+                                    if (!v) return '奖项不能为空';
+                                },
+                                emptytext: "-"
+                            }
                         },
-                        emptytext: "-"
-                    }
-                },
-                {
-                    field: "school",
-                    title: "学校",
-                    align: "center",
-                    editable: {
-                        type: 'text',
-                        title: '学校',
-                        toggle: 'click',
-                        validate: function (v) {
-                            if (!v) return '学校不能为空';
+                        {
+                            field: "student",
+                            title: "作者姓名",
+                            align: "center",
+                            editable: {
+                                type: 'text',
+                                title: '作者姓名',
+                                toggle: 'click',
+                                validate: function (v) {
+                                    if (!v) return '作者姓名不能为空';
+                                },
+                                emptytext: "-"
+                            }
                         },
-                        emptytext: "-"
+                        {
+                            field: "teacher",
+                            title: "指导老师",
+                            align: "center",
+                            editable: {
+                                type: 'text',
+                                title: '指导老师',
+                                toggle: 'click',
+                                validate: function (v) {
+                                    if (!v) return '指导老师不能为空';
+                                },
+                                emptytext: "-"
+                            }
+                        },
+                        {
+                            field: "school",
+                            title: "学校",
+                            align: "center",
+                            editable: {
+                                type: 'text',
+                                title: '学校',
+                                toggle: 'click',
+                                validate: function (v) {
+                                    if (!v) return '学校不能为空';
+                                },
+                                emptytext: "-"
+                            }
+                        }
+                    ],
+                    onEditableSave: function (field, row, oldValue, $el) {
+                        $.ajax({
+                            type: "post",
+                            url: "/updateone",
+                            data: row,
+                            dataType: 'JSON',
+                            error: function () {
+                                alert('编辑失败');
+                            }
+                        });
                     }
-                }
-            ],
-            onEditableSave: function (field, row, oldValue, $el) {
-                $.ajax({
-                    type: "post",
-                    url: "/update",
-                    data: row,
-                    dataType: 'JSON',
-                    error: function () {
-                        alert('编辑失败');
-                    }
-                });
+                })
             }
         })
     })

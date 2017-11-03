@@ -5,11 +5,11 @@ $(function () {
             url:"/uploadone",
             dataType:"json",
             data:$("#data_add").serialize(),
-            success:function () {
+            success:function (data) {
                 $("#table").bootstrapTable('insertRow',{
                     index:1,
                     row:{
-                        number:$("").val(),
+                        number:data.number,
                         area:$("#add_area").val(),
                         workName:$("#add_workName").val(),
                         level:$("#add_level").val(),
