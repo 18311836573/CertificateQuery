@@ -23,6 +23,26 @@
     <script src="js/vendor/html5shiv.js"></script>
     <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .wrap {
+            width:70px;
+            margin-bottom:5px;
+            position:relative;
+        }
+        .notice {
+            width:20px;
+            height:20px;
+            line-height:20px;
+            font-size:10px;
+            color:#fff;
+            text-align:center;
+            background-color:#f00;
+            border-radius:50%;
+            position:absolute;
+            right:-10px;
+            top:-19px;
+        }
+    </style>
 </head>
 <body>
 
@@ -39,8 +59,9 @@
             <li class="dropdown active">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理<b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#tab_import" data-toggle="tab">导入</a></li>
                     <li class="active"><a href="#tab_table" data-toggle="tab">数据管理</a></li>
+                    <li><a href="#tab_import" data-toggle="tab">导入</a></li>
+                    <li><a href="#tab_reapply" data-toggle="tab" id="repply_button">补办信息<!--<div class="wrap"><div class="notice">1</div></div>--></a></li>
                 </ul>
             </li>
             <li><a href="#index" data-toggle="tab">查询</a></li>
@@ -186,7 +207,31 @@
         </form><!--import-->
     </div><!--import-->
 
-    <div class="tab-pane fade in active" id="tab_table">
+    <div class="tab-pane fade in active" id="tab_reapply">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#w" data-toggle="tab">待处理</a></li>
+            <li role="presentation"><a href="#a" data-toggle="tab">已处理</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="w">
+                <table id="reapply_table_w"></table>
+                <div class="row">
+                    <br>
+                    <button id="agree" class="btn btn-success col-md-2 col-md-offset-3">同意</button>
+                    <button id="disagree" class="btn btn-danger col-md-2 col-md-offset-1">拒绝</button>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="a">
+                <table id="reapply_table_a"></table>
+                <div class="row">
+                    <br>
+                    <button id="agree_again" class="btn btn-success col-md-2 col-md-offset-5">同意</button>
+                </div>
+            </div>
+        </div>
+    </div><!--reapply-->
+
+    <div class="tab-pane fade" id="tab_table">
         <div style="width: 1300px" class="col-md-offset-1">
             <div id="toolbar">
 
@@ -616,6 +661,56 @@
                                                                                  data-toggle="tooltip"></a>
                             <!--官方主页-->
 
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <span data-toggle="tooltip" data-placement="top" title="将PDF以邮件发送">
+                            <img src="img/icons/证书补办.svg"
+                                 alt="证书补办"
+                                 style="height: 50px;width: 50px;cursor:pointer"
+                                 data-toggle="modal"
+                                 title="证书补办" data-target="#reapply">
+                            <div class="modal fade" id="reapply" tabindex="-1" role="dialog"
+                                 aria-labelledby="reapplyLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">证书补办</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table id="reapply_table"></table>
+                                            <form id="reapply_form" action="sendMail">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="Lreapply">收件人地址：</label>
+                                                    <form class="form-inline">
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">@</div>
+                                                                <input type="text" class="form-control" name="receiveMailAccount"
+                                                                       id="Lreapply" placeholder="Email">
+                                                            </div>
+                                                            <br>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><img src="img/icons/identification8.png" height="18"
+                                                                                                    width="17"/></div>
+                                                                <input type="text" class="form-control" id="apply_ID_card" name="apply_ID_card" placeholder="请输入其中一个作者的身份证号">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <button type="button" class="btn btn-primary" id="apply">申请</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--model框-->
+                            </span>
+
                         </div><!--icon-->
 
                     </div>
@@ -830,6 +925,94 @@
                             $("tr:eq(" + k + ") th:eq(4)").append(data.p[j].teacher2)
                             $("tr:eq(" + k + ") th:eq(4)").append('<br>')
                         }
+                        $("#email_table").bootstrapTable({
+                            data:data,
+                            clickToSelect: true,
+                            columns: [
+                                {
+                                    checkbox: true
+                                },
+                                {
+                                    field: "number",
+                                    title: "作品编号",
+                                    align: "center"
+                                },
+                                {
+                                    field: "area",
+                                    title: "赛区",
+                                    align: "center"
+                                },
+                                {
+                                    field: "workName",
+                                    title: "作品名",
+                                    align: "center"
+                                },
+                                {
+                                    field: "level",
+                                    title: "奖项",
+                                    align: "center"
+                                },
+                                {
+                                    field: "student",
+                                    title: "作者姓名",
+                                    align: "center"
+                                },
+                                {
+                                    field: "teacher",
+                                    title: "指导老师",
+                                    align: "center"
+                                },
+                                {
+                                    field: "school",
+                                    title: "学校",
+                                    align: "center"
+                                }
+                            ]
+                        })
+                        $("#reapply_table").bootstrapTable({
+                            data:data,
+                            clickToSelect: true,
+                            columns: [
+                                {
+                                    checkbox: true
+                                },
+                                {
+                                    field: "number",
+                                    title: "作品编号",
+                                    align: "center"
+                                },
+                                {
+                                    field: "area",
+                                    title: "赛区",
+                                    align: "center"
+                                },
+                                {
+                                    field: "workName",
+                                    title: "作品名",
+                                    align: "center"
+                                },
+                                {
+                                    field: "level",
+                                    title: "奖项",
+                                    align: "center"
+                                },
+                                {
+                                    field: "student",
+                                    title: "作者姓名",
+                                    align: "center"
+                                },
+                                {
+                                    field: "teacher",
+                                    title: "指导老师",
+                                    align: "center"
+                                },
+                                {
+                                    field: "school",
+                                    title: "学校",
+                                    align: "center"
+                                }
+                            ]
+                        })
                         $("#Loading").empty("div")
                     }
                     return false;
@@ -1072,6 +1255,127 @@
         })
     })
 </script><!--table 初始化-->
+
+<script>
+    $(function () {
+        $.ajax({
+            type: "get",
+            url: "/query",
+            data:{
+              result:"true"
+            },
+            dataType: 'JSON',
+            success:function (data) {
+                $("#reapply_table_w").bootstrapTable({
+                    url: data,
+                    search: true,
+                    searchAlign: 'right',
+                    pagination: true,
+                    pageSize: 10,
+                    pageList: [10, 25, 50, 100],
+                    showToggle: true,
+                    showColumns: true,
+                    clickToSelect: true,
+                    columns: [
+                        {
+                            checkbox: true
+                        },
+                        {
+                            field: "number",
+                            title: "作品编号",
+                            align: "center"
+                        },
+                        {
+                            field: "area",
+                            title: "赛区",
+                            align: "center"
+                        },
+                        {
+                            field: "workName",
+                            title: "作品名",
+                            align: "center"
+                        },
+                        {
+                            field: "level",
+                            title: "奖项",
+                            align: "center"
+                        },
+                        {
+                            field: "student",
+                            title: "作者姓名",
+                            align: "center"
+                        },
+                        {
+                            field: "teacher",
+                            title: "指导老师",
+                            align: "center"
+                        },
+                        {
+                            field: "school",
+                            title: "学校",
+                            align: "center"
+                        }
+                    ]
+                })
+                $("#reapply_table_a").bootstrapTable({
+                    url: data,
+                    search: true,
+                    searchAlign: 'right',
+                    pagination: true,
+                    pageSize: 10,
+                    pageList: [10, 25, 50, 100],
+                    showToggle: true,
+                    showColumns: true,
+                    clickToSelect: true,
+                    columns: [
+                        {
+                            checkbox: true
+                        },
+                        {
+                            field: "number",
+                            title: "作品编号",
+                            align: "center"
+                        },
+                        {
+                            field: "area",
+                            title: "赛区",
+                            align: "center"
+                        },
+                        {
+                            field: "workName",
+                            title: "作品名",
+                            align: "center"
+                        },
+                        {
+                            field: "level",
+                            title: "奖项",
+                            align: "center"
+                        },
+                        {
+                            field: "student",
+                            title: "作者姓名",
+                            align: "center"
+                        },
+                        {
+                            field: "teacher",
+                            title: "指导老师",
+                            align: "center"
+                        },
+                        {
+                            field: "school",
+                            title: "学校",
+                            align: "center"
+                        }
+                    ]
+                })
+                if(data.p.length > 0){
+                    $("#repply_button").append("<div class=\"wrap\"><div class=\"notice\">result_number</div></div>")
+                }
+            }
+        })
+
+    })
+</script><!--reapply_table 初始化-->
 
 <script>
     $("#information").click(function () {

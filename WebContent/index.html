@@ -293,6 +293,60 @@
                                                                                  data-toggle="tooltip"></a>
                             <!--官方主页-->
 
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <span data-toggle="tooltip" data-placement="top" title="证书补办">
+                            <img src="img/icons/证书补办.svg"
+                                            alt="证书补办"
+                                            style="height: 50px;width: 50px;cursor:pointer"
+                                            data-toggle="modal"
+                                            title="证书补办" data-target="#reapply">
+                            <div class="modal fade" id="reapply" tabindex="-1" role="dialog"
+                                 aria-labelledby="reapplyLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">证书补办</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table id="reapply_table"></table>
+                                            <form id="reapply_form" action="sendMail">
+                                                <div class="form-group">
+                                                    <form class="form-inline">
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">@</div>
+                                                                <input type="text" class="form-control" name="receiveMailAccount"
+                                                                       id="Lreapply" placeholder="Email">
+                                                            </div>
+                                                            <br>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></div>
+                                                                <input type="text" class="form-control" id="apply_area" name="apply_area" placeholder="请输入邮寄具体地址">
+                                                            </div>
+                                                            <br>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><img src="img/icons/identification8.png" height="18"
+                                                                                                    width="17"/></div>
+                                                                <input type="text" class="form-control" id="apply_ID_card" name="apply_ID_card" placeholder="请输入其中一个作者的身份证号">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <button type="button" class="btn btn-primary" id="apply">申请</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--model框-->
+                            </span>
+
                         </div><!--icon-->
 
                     </div>
@@ -457,6 +511,50 @@
                             $("tr:eq(" + k + ") th:eq(4)").append('<br>')
                         }
                         $("#email_table").bootstrapTable({
+                            data:data,
+                            clickToSelect: true,
+                            columns: [
+                                {
+                                    checkbox: true
+                                },
+                                {
+                                    field: "number",
+                                    title: "作品编号",
+                                    align: "center"
+                                },
+                                {
+                                    field: "area",
+                                    title: "赛区",
+                                    align: "center"
+                                },
+                                {
+                                    field: "workName",
+                                    title: "作品名",
+                                    align: "center"
+                                },
+                                {
+                                    field: "level",
+                                    title: "奖项",
+                                    align: "center"
+                                },
+                                {
+                                    field: "student",
+                                    title: "作者姓名",
+                                    align: "center"
+                                },
+                                {
+                                    field: "teacher",
+                                    title: "指导老师",
+                                    align: "center"
+                                },
+                                {
+                                    field: "school",
+                                    title: "学校",
+                                    align: "center"
+                                }
+                            ]
+                        })
+                        $("#reapply_table").bootstrapTable({
                             data:data,
                             clickToSelect: true,
                             columns: [
