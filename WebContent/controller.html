@@ -91,7 +91,7 @@
                         <span style="color: red">*</span>请选择作品参赛年份：&nbsp;&nbsp;&nbsp;
                         <div class="btn-group">
                             <select data-toggle="select" class="form-control select select-inverse mrs mbm"
-                                    id="import_year" name="import_year">
+                                    id="import_year" name="year">
                                 <option value="2017">2017</option>
                                 <option value="2016">2016</option>
                                 <option value="2015">2015</option>
@@ -137,7 +137,7 @@
                         <span style="color: red">*</span>请选择作品参赛赛区：&nbsp;&nbsp;&nbsp;
                         <div class="btn-group">
                             <select data-toggle="select" class="form-control select select-inverse mrs mbm"
-                                    id="import_month" name="import_month">
+                                    id="import_month" name="area">
                                 <option value="上海">上海</option>
                                 <option value="江苏">江苏</option>
                                 <option value="山东">山东</option>
@@ -251,7 +251,7 @@
                                 </h4>
                             </div>
                             <div class="modal-body">
-                                <form action="" method="post" id="data_add">
+                                <form action="uploadone" method="post" id="data_add">
                                     <div class="container">
 
                                         <div class="row">
@@ -260,7 +260,7 @@
                                                 <div class="btn-group">
                                                     <select data-toggle="select"
                                                             class="form-control select select-inverse mrs mbm"
-                                                            id="add_year" name="add_year">
+                                                            id="add_year" name="year">
                                                         <option value="2017">2017</option>
                                                         <option value="2016">2016</option>
                                                         <option value="2015">2015</option>
@@ -282,7 +282,7 @@
                                                 <div class="btn-group">
                                                     <select data-toggle="select"
                                                             class="form-control select select-inverse mrs mbm"
-                                                            id="add_month" name="add_month">
+                                                            id="add_month" name="month">
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
@@ -308,7 +308,7 @@
                                                 <div class="btn-group">
                                                     <select data-toggle="select"
                                                             class="form-control select select-inverse mrs mbm"
-                                                            id="add_area" name="add_area">
+                                                            id="add_area" name="area">
                                                         <option value="上海">上海</option>
                                                         <option value="江苏">江苏</option>
                                                         <option value="山东">山东</option>
@@ -358,7 +358,7 @@
                                                     <div class="btn-group">
                                                         <select data-toggle="select"
                                                                 class="form-control select select-inverse mrs mbm"
-                                                                id="add_level" name="add_level">
+                                                                id="add_level" name="level">
                                                             <option value="特等奖">特等奖</option>
                                                             <option value="一等奖">一等奖</option>
                                                             <option value="二等奖">二等奖</option>
@@ -375,7 +375,7 @@
                                             <div class="col-md-3 col-md-offset-1">
                                                 <div class="form-group">
                                                     <span style="color: red">*</span><span>作品名：</span>
-                                                    <input type="text" id="add_workName" name="add_workName"
+                                                    <input type="text" id="add_workName" name="workName"
                                                            placeholder="请输入作品名" class="form-control"/>
                                                 </div>
                                             </div>
@@ -388,7 +388,7 @@
                                             <div class="col-md-3 col-md-offset-1">
                                                 <div class="form-group">
                                                     <span style="color: red">*</span><span>作者姓名：</span>
-                                                    <input type="text" id="add_name" name="add_name"
+                                                    <input type="text" id="add_name" name="student1"
                                                            placeholder="多个人名请以一个空格隔开" class="form-control"/>
                                                 </div>
                                             </div>
@@ -400,7 +400,7 @@
                                             <div class="col-md-3 col-md-offset-1">
                                                 <div class="form-group">
                                                     <span style="color: red">*</span><span>指导老师：</span>
-                                                    <input type="text" id="add_teacher" name="add_teacher"
+                                                    <input type="text" id="add_teacher" name="teacher1"
                                                            placeholder="请填入指导老师姓名" class="form-control"/>
                                                 </div>
                                             </div>
@@ -412,7 +412,7 @@
                                             <div class="col-md-3 col-md-offset-1">
                                                 <div class="form-group">
                                                     <span style="color: red">*</span><span>学校：</span>
-                                                    <input type="text" id="add_school" name="add_school"
+                                                    <input type="text" id="add_school" name="school"
                                                            placeholder="请输入学校" class="form-control"/>
                                                 </div>
                                             </div>

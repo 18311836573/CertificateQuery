@@ -2,7 +2,7 @@ $(function () {
     $("#toolbar_add").click(function () {
         $.ajax({
             type:"post",
-            url:"/uploadone",
+            url:"uploadone",
             dataType:"json",
             data:$("#data_add").serialize(),
             success:function (data) {
