@@ -207,7 +207,7 @@
         </form><!--import-->
     </div><!--import-->
 
-    <div class="tab-pane fade in active" id="tab_reapply">
+    <div class="tab-pane fade" id="tab_reapply">
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="#w" data-toggle="tab">待处理</a></li>
             <li role="presentation"><a href="#a" data-toggle="tab">已处理</a></li>
@@ -231,7 +231,7 @@
         </div>
     </div><!--reapply-->
 
-    <div class="tab-pane fade" id="tab_table">
+    <div class="tab-pane fade in active" id="tab_table">
         <div style="width: 1300px" class="col-md-offset-1">
             <div id="toolbar">
 
@@ -840,7 +840,7 @@
     $(function () {
         $("#log_out").click(function () {
             $.ajax({
-                url:"/logout",
+                url:"logout",
                 success:function () {
                     window.location = "index.html"
                 }
@@ -867,7 +867,7 @@
             }
 
             $("#file_form").ajaxSubmit({
-                url:"/upload",
+                url:"upload",
                 dataType: "json",
                 resetForm: true,
                 success: function (data) {
@@ -892,7 +892,7 @@
     $(document).ready(function () {
         $("#search").submit(function () {
             $("#search").ajaxSubmit({
-                url:"/query",
+                url:"query",
                 dataType: "json",
 //	           clearForm : true,
                 success: function (data) {
@@ -1086,7 +1086,7 @@
     $(function () {
         $.ajax({
             type: "get",
-            url: "/query",
+            url: "query",
             data:{
               result:"true"
             },
@@ -1097,6 +1097,7 @@
                     search: true,
                     searchAlign: 'right',
                     toolbar: '#toolbar',
+                    sidePagination:"server",
                     pagination: true,
                     pageSize: 10,
                     pageList: [10, 25, 50, 100],
@@ -1242,7 +1243,7 @@
                     onEditableSave: function (field, row, oldValue, $el) {
                         $.ajax({
                             type: "post",
-                            url: "/updateone",
+                            url: "updateone",
                             data: row,
                             dataType: 'JSON',
                             error: function () {
@@ -1260,7 +1261,7 @@
     $(function () {
         $.ajax({
             type: "get",
-            url: "/query",
+            url: "query",
             data:{
               result:"true"
             },

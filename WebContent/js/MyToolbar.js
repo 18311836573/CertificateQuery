@@ -6,6 +6,7 @@ $(function () {
             dataType:"json",
             data:$("#data_add").serialize(),
             success:function (data) {
+                alert("增加信息成功！")
                 $("#table").bootstrapTable('insertRow',{
                     index:1,
                     row:{
@@ -27,7 +28,7 @@ $(function () {
             $.ajax({
                 type:"post",
                 data:row.number,
-                url:"/delete",
+                url:"delete",
                 success:function (data) {
                     alert("删除成功")
                     $("#table").bootstrapTable('remove', {
@@ -45,7 +46,7 @@ $(function () {
             $.ajax({
                 type:"post",
                 dataType:"json",
-                url:"/download",
+                url:"download",
                 data: row.number,
                 success:function () {
                     $("#email").modal('hide')
