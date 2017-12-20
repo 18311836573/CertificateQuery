@@ -312,7 +312,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <table id="reapply_table"></table>
-                                            <form id="reapply_form" action="sendMail">
+                                            <form id="reapply_form">
                                                 <div class="form-group">
                                                     <form class="form-inline">
                                                         <br>
@@ -345,7 +345,7 @@
                                     </div>
                                 </div>
                             </div><!--model框-->
-                            </span>
+                            </span><!--证书补办-->
 
                         </div><!--icon-->
 
@@ -708,9 +708,18 @@
 
 <script>
     $(function () {
-        $("#ID_card")
+        $("#apply").click(function () {
+            $.ajax({
+                type:"post",
+                url:"certificate",
+                data:$("#reapply_form").serialize(),
+                success:function () {
+                    alert("申请提交成功请耐心等待审核")
+                }
+            })
+        })
     })
-</script>
+</script><!--index证书补办-->
 
 </body>
 </html>
