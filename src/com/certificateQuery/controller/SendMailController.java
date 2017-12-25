@@ -19,7 +19,8 @@ public class SendMailController {
 
 	@RequestMapping(value = "/sendMail")
 	public @ResponseBody String sendmail(String number, String receiveMailAccount, HttpServletRequest request) {
-		System.out.println("调用sendMail");
+		System.out.println("调用sendMail "+number);
+		
 		String filepath = request.getServletContext().getRealPath("/download");
 		String filename = filepath + File.separator + PasswordEncode.md5Encode(number) + ".pdf";
 		try {

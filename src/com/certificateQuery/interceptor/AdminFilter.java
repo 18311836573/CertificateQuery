@@ -27,11 +27,11 @@ public class AdminFilter implements Filter {
 			String login  = (String)session.getAttribute("login");
 			System.out.println(login);
 			if(login == null || !login.equals("true")) {
-				System.out.println("ÉĞÎ´µÇÂ½");
+				System.out.println("å°šæœªç™»å½•");
 				res.sendRedirect("http://"+req.getHeader("Host")+"/certificateQuery-SSM/index.html");
 			}
 			else {
-				System.out.println("ÒÑ¾­µÇÂ½");
+				System.out.println("å·²ç»ç™»å½•");
 				chain.doFilter(request, response);
 			}
 			
@@ -42,6 +42,6 @@ public class AdminFilter implements Filter {
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
-		System.out.println("µ÷ÓÃadminfilter");
+		System.out.println("è°ƒç”¨adminfilter");
 	}
 }

@@ -2,6 +2,7 @@ package com.certificateQuery.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -31,5 +32,9 @@ public interface WorkDao {
 	
 	@Transactional(readOnly=false,rollbackFor=Exception.class,timeout=6000,propagation = Propagation.REQUIRES_NEW,isolation=Isolation.READ_COMMITTED)
 	public int updateWork(WorkBean work);
+	
+	@Transactional(readOnly=false,rollbackFor=Exception.class,timeout=6000,propagation = Propagation.REQUIRES_NEW,isolation=Isolation.READ_COMMITTED)
+	public List<WorkBean> findWorks(@Param("start")Integer start,@Param("num")Integer num);
+	
 	
 }

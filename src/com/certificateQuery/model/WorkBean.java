@@ -6,8 +6,8 @@ public class WorkBean {
 	private String area = "";
 	private String level = "";
 	private String school = "";
-	private String number = ""; //证书编号
-	private String workid = ""; //作品编号
+	private String number = "";
+	private String workid = "";
 	private String workname = "";
 	private String student1 = "";
 	private String student1Id = "";

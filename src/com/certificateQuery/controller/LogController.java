@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,7 +46,7 @@ public class LogController {
 		HttpSession session = request.getSession();
 		session.removeAttribute("login");
 		session.removeAttribute("level");
-		System.out.println("µ÷ÓÃlogout" + request.getSession().getAttribute("login"));
+		System.out.println("ï¿½ï¿½ï¿½ï¿½logout" + request.getSession().getAttribute("login"));
 		return "index";
 	}
 

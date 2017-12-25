@@ -5,10 +5,11 @@
     <title>中国大学生计算机设计大赛结果查询</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	
     <!-- Loading Bootstrap -->
     <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="js/vendor/js/bootstrap.js"></script>
-
+<script src="js/vendor/jquery.min.js"></script>
     <!--Loading BootstrapValidate-->
     <link rel="stylesheet" href="./css/validate css/bootstrapValidator.min.css">
 
@@ -367,7 +368,7 @@
     </div><!--帮助界面-->
 </div><!--tab分页container-->
 
-<script src="js/vendor/jquery.min.js"></script>
+
 <script src="css/validate js/bootstrapValidator.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -680,7 +681,7 @@
 <script>
     $("#send").click(function () {
         var info = {
-            number: $("th#number").text()
+            number: $("th#number").text(),
             IDcard: $("#ID_card").text()
         };
         $("#e-mail").ajaxSubmit({

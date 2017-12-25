@@ -23,6 +23,10 @@
 			and school = #{param4}
 		</if>
 	</select>
+	
+	<select id="findWorks" resultType="com.certificateQuery.model.WorkBean" parameterType="java.lang.Integer">
+		select * from workTbl LIMIT #{start},#{num}
+	</select>
 
 	<select id="findMaxNumber" resultType="java.lang.Long">
 			select Max(number) from workTbl

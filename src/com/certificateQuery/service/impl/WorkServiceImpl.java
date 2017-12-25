@@ -48,7 +48,8 @@ public class WorkServiceImpl implements WorkService {
 	}
 
 	@Override
-	public int insertWorks(InputStream is, String year, String month, String area, List<WorkBean> list) throws Exception {
+	public int insertWorks(InputStream is, String year, String month, String area, List<WorkBean> list)
+			throws Exception {
 		ExcelHelper excelHelper = new ExcelHelper();
 		excelHelper.importXlsx(is, year, month, area, list);
 		int resultNum = workdao.insertWorks(list);
@@ -70,7 +71,7 @@ public class WorkServiceImpl implements WorkService {
 	// }
 	// int resultNum = 0;
 	// for (WorkBean work : list) {
-	// if (workdao. != null) { //²éÕÒµÄ±ê×¼ÓÐÎÊÌâ
+	// if (workdao. != null) { //ï¿½ï¿½ï¿½ÒµÄ±ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	// resultNum += workdao.updateWork(work);
 	// } else {
 	// resultNum += workdao.insertWork(work);
@@ -99,6 +100,11 @@ public class WorkServiceImpl implements WorkService {
 	@Override
 	public int deleteWork(List<WorkBean> list) {
 		return workdao.deleteWork(list);
+	}
+
+	public List<WorkBean> selectWorks(int start) {
+		System.out.println(String.valueOf(start));
+		return workdao.findWorks(Integer.valueOf(start),Integer.valueOf(start+10));
 	}
 
 }
