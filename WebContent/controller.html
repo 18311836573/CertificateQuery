@@ -1093,16 +1093,8 @@
 
 <script>
     $(function () {
-        $.ajax({
-            type: "get",
-            url: "queryWorks",
-            data: {
-                result: "true"
-            },
-            dataType: 'JSON',
-            success: function (data) {
                 $("#table").bootstrapTable({
-                    url: data,
+                    url: "queryWorks",
                     search: true,
                     searchAlign: 'right',
                     toolbar: '#toolbar',
@@ -1261,9 +1253,7 @@
                         });
                     }
                 })
-            }
-        })
-    })
+            })
 </script><!--table 初始化-->
 
 <script>
@@ -1271,9 +1261,9 @@
         $.ajax({
             type: "get",
             url: "queryCertificate",
-            data: {
-                result: "true"
-            },
+//             data: {
+//                 result: "true"
+//             },
             dataType: 'JSON',
             success: function (data) {
                 $("#reapply_table_w").bootstrapTable({

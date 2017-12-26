@@ -22,8 +22,8 @@ public class BeanToJson {
 				e.printStackTrace();
 			}
 		}
-		String result = "{\"result\":\"true\","
-				+ "\"p\":[";
+		String result = "{"
+				+ "\"data\":[";
 		for(int i = 0; i<jsons.size(); i++) {
 			result += jsons.get(i) + ",";
 			

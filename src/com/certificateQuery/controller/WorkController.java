@@ -132,8 +132,8 @@ public class WorkController {
 	}
 
 	@RequestMapping(value = "/queryWorks")
-	public @ResponseBody String works(int start) {
-		List<WorkBean> list = workService.selectWorks(start);
+	public @ResponseBody String works(int offset,int limit,String oder) {
+		List<WorkBean> list = workService.selectWorks(offset);
 		return BeanToJson.WorkBeanToJson(list);
 	}
 }
