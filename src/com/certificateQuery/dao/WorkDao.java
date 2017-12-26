@@ -28,7 +28,7 @@ public interface WorkDao {
 	public int insertWork(WorkBean work);
 	
 	@Transactional(readOnly=false,rollbackFor=Exception.class,timeout=6000,propagation = Propagation.REQUIRES_NEW,isolation=Isolation.READ_COMMITTED)
-	public int deleteWork(List<WorkBean> list);
+	public int deleteWork(String number);
 	
 	@Transactional(readOnly=false,rollbackFor=Exception.class,timeout=6000,propagation = Propagation.REQUIRES_NEW,isolation=Isolation.READ_COMMITTED)
 	public int updateWork(WorkBean work);

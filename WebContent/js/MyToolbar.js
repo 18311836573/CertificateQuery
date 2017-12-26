@@ -27,7 +27,9 @@ $(function () {
         $.map($("#table").bootstrapTable('getSelections'), function (row) {
             $.ajax({
                 type:"post",
-                data:row.number,
+                data:{
+                	number : row.number
+                	},
                 url:"delete",
                 success:function (data) {
                     alert("删除成功")

@@ -98,8 +98,8 @@ public class WorkServiceImpl implements WorkService {
 	}
 
 	@Override
-	public int deleteWork(List<WorkBean> list) {
-		return workdao.deleteWork(list);
+	public int deleteWork(String number) {
+		return workdao.deleteWork(number);
 	}
 
 	public List<WorkBean> selectWorks(int start) {

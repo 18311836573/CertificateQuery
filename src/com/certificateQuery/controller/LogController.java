@@ -28,7 +28,7 @@ public class LogController {
 	@Resource
 	private AdminServiceImpl adminService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody String login(String username, String password, HttpServletRequest request) {
 		System.out.println(username + "\n" + password);
 		AdminBean admin = adminService.selectAdmin(username);

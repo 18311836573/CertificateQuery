@@ -123,8 +123,8 @@ public class WorkController {
 	}
 
 	@RequestMapping(value = "/delete")
-	public @ResponseBody String delete(WorkBeanList workBeanList) {
-		if (workService.deleteWork(workBeanList.getWorks()) != workBeanList.getWorks().size()) {
+	public @ResponseBody String delete(String number) {
+		if (workService.deleteWork(number) != 1) {
 			return "{\"result\":\"false\"}";
 		} else {
 			return "{\"result\":\"true\"}";

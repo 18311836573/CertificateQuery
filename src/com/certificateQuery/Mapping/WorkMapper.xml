@@ -81,12 +81,8 @@
 		#{teacher2,jdbcType=VARCHAR},#{teacher2Id,jdbcType=VARCHAR})
 	</insert>
 	<!-- 删除 -->
-	<delete id="deleteWork" parameterType="java.util.List">
-		delete from workTbl where number in
-		<foreach collection="list" item="item" index="index" open="("
-			close=")" separator=",">
-			#{item.number}
-		</foreach>
+	<delete id="deleteWork" parameterType="java.lang.String">
+		delete from workTbl where number = #{param1}
 	</delete>
 
 	<!-- 更新 -->

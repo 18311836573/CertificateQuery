@@ -19,5 +19,5 @@ public interface WorkService {
 	
 	public int insertWork(WorkBean work);
 	
-	public int deleteWork(List<WorkBean> work);
+	public int deleteWork(String number);
 }
