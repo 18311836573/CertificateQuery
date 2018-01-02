@@ -71,7 +71,7 @@ public class WorkController {
 		return "{\"result\":\"OK\"}";
 	}
 
-	@RequestMapping(value = "/uploadone")
+	@RequestMapping(value = "/uploadone",method= RequestMethod.POST,produces = "application/json; charset=utf-8")
 	public @ResponseBody String upload(WorkBean work) {
 		System.out.println(work.getLevel());
 		int result = workService.insertWork(work);
@@ -112,7 +112,7 @@ public class WorkController {
 	// return "{\"result\":\"OK\"}";
 	// }
 
-	@RequestMapping(value = "/updateone")
+	@RequestMapping(value = "/updateone",method= RequestMethod.POST,produces = "application/json; charset=utf-8")
 	public @ResponseBody String update(WorkBean work) {
 		System.out.println(work.getNumber());
 		if (workService.updateWork(work) == 0) {
@@ -122,7 +122,7 @@ public class WorkController {
 		}
 	}
 
-	@RequestMapping(value = "/delete")
+	@RequestMapping(value = "/delete",produces = "application/json; charset=utf-8")
 	public @ResponseBody String delete(String number) {
 		if (workService.deleteWork(number) != 1) {
 			return "{\"result\":\"false\"}";
@@ -131,7 +131,7 @@ public class WorkController {
 		}
 	}
 
-	@RequestMapping(value = "/queryWorks")
+	@RequestMapping(value = "/queryWorks",produces = "application/json; charset=utf-8")
 	public @ResponseBody String works(int offset,int limit,String oder) {
 		List<WorkBean> list = workService.selectWorks(offset);
 		return BeanToJson.WorkBeanToJson(list);

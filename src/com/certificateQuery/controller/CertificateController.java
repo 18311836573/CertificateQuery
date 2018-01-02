@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.certificateQuery.model.Certificate;
@@ -18,13 +19,13 @@ public class CertificateController {
 	@Resource
 	private CertificateServiceImpl certificateService;
 	
-	@RequestMapping(value="queryCertificate")
+	@RequestMapping(value="queryCertificate", produces = "application/json; charset=utf-8")
 	public @ResponseBody String getCertificates(int start) {
 		List<Certificate> list = certificateService.selectCertificates(start);
 		return BeanToJson.CertificateToJson(list);
 	}
 	
-	@RequestMapping(value="judgeCertificate")
+	@RequestMapping(value="judgeCertificate", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public @ResponseBody String getJudgeCertificate(String workId,String isjudge) {
 		if(certificateService.updateCertificate(workId, isjudge) == 1) {
 			return "{\"result\":\"true\"}";
@@ -33,7 +34,7 @@ public class CertificateController {
 		}
 	}
 	
-	@RequestMapping(value="certificate")
+	@RequestMapping(value="certificate", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public @ResponseBody String getCertificate(String number, String email, String address, String studentId) {
 		Certificate certificate = new Certificate(number,email,address,studentId,"false");
 		if(certificateService.insertCertificate(certificate) == 1) {

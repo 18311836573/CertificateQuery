@@ -41,7 +41,7 @@ public class LogController {
 		}
 	}
 
-	@RequestMapping(value = "/logout")
+	@RequestMapping(value = "/logout", produces = "application/json; charset=utf-8")
 	public String logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		session.removeAttribute("login");
@@ -50,7 +50,7 @@ public class LogController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/createAdmin")
+	@RequestMapping(value = "/createAdmin" , method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public @ResponseBody String createAdmin(AdminBean admin, HttpServletRequest request) {
 		if(judgeLevel(request)) {
 			return "{\"result\":\"false\"}";
@@ -69,7 +69,7 @@ public class LogController {
 			return "{\"result\":\"false\"}";
 	}
 
-	@RequestMapping(value = "/deleteAdmin")
+	@RequestMapping(value = "/deleteAdmin", produces = "application/json; charset=utf-8")
 	public @ResponseBody String deleteAdmin(String username, HttpServletRequest request) {
 		if(judgeLevel(request)) {
 			return "{\"result\":\"false\"}";
@@ -84,7 +84,7 @@ public class LogController {
 		return "{\"result\":\"true\"}";
 	}
 
-	@RequestMapping(value = "/updateAdmin")
+	@RequestMapping(value = "/updateAdmin", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public @ResponseBody String updateAdmin(AdminBean admin, HttpServletRequest request) {
 		if(judgeLevel(request)) {
 			return "{\"result\":\"false\"}";
@@ -103,7 +103,7 @@ public class LogController {
 		}
 	}
 
-	@RequestMapping(value = "/queryAdmin")
+	@RequestMapping(value = "/queryAdmin", produces = "application/json; charset=utf-8")
 	public @ResponseBody String queryAdmin(String username, HttpServletRequest request) {
 		if(judgeLevel(request)) {
 			return "{\"result\":\"false\"}";
