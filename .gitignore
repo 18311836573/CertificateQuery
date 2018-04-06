@@ -1,0 +1,11 @@
+/target/
+/.idea
+.settings/
+target/
+.classpath
+.project
+CertificateQuery.iml
+/logs
+src/test
+src/main/resources/application.properties
+src/main/resources/mail.properties
