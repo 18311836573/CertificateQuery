@@ -34,6 +34,7 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public CommonResponse sendMail(String filename, String name, String mailAccount) {
+
         MimeMessage message = mailSender.createMimeMessage();
         Properties props = new Properties();
         Session session = Session.getDefaultInstance(props);

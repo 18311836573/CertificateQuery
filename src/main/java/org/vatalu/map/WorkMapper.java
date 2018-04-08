@@ -43,7 +43,7 @@ public interface WorkMapper {
             "insert into workTbl(" +
             "year,month," +
             "area,level,school," +
-            "number,work_id,work_name," +
+            "number,workid,workname," +
             "student1,student1_Id," +
             "student2,student2_id," +
             "student3,student3_Id," +
@@ -65,7 +65,7 @@ public interface WorkMapper {
     @Insert("insert into workTbl(" +
             "year,month," +
             "area,level,school," +
-            "number,work_id,work_name," +
+            "number,workid,workname," +
             "student1,student1_Id," +
             "student2,student2_id," +
             "student3,student3_Id," +
@@ -85,7 +85,7 @@ public interface WorkMapper {
             "set" +
             "year=#{year,jdbcType=INTEGER},month=#{month,jdbcType=INTEGER}," +
             "area=#{area,jdbcType=VARCHAR},level=#{level,jdbcType=VARCHAR},school=#{school,jdbcType=VARCHAR}," +
-            "work_id=#{workid,jdbcType=VARCHAR},work_name=#{workname,jdbcType=VARCHAR}," +
+            "workid=#{workid,jdbcType=VARCHAR},workname=#{workname,jdbcType=VARCHAR}," +
             "student1=#{student1,jdbcType=VARCHAR},student1_Id=#{student1Id,jdbcType=CHAR}," +
             "student2=#{student2,jdbcType=VARCHAR},student2_Id=#{student2Id,jdbcType=CHAR}," +
             "student3=#{student3,jdbcType=VARCHAR},student3_Id=#{student3Id,jdbcType=CHAR}," +

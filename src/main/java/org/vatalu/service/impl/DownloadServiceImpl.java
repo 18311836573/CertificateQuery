@@ -5,9 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.vatalu.map.WorkMapper;
 import org.vatalu.model.entity.Work;
+import org.vatalu.model.response.CommonResponse;
 import org.vatalu.util.PdfUtil;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +18,15 @@ public class DownloadServiceImpl {
     @Autowired
     private WorkMapper workMapper;
 
-    public boolean getCertificatePdf(String filepath,String pdfpath,String fontpath,String number) {
+    public CommonResponse getCertificatePdf(String filepath, String pdfpath, String fontpath, String number) {
         Work work = workMapper.findByNumber(number);
         PdfUtil pdfHelper = new PdfUtil();
-        List<Work> workList = new ArrayList<>();
-        workList.add(work);
-        System.out.println("调用生成pdf函数");
-        pdfHelper.createPdfs(filepath, pdfpath, fontpath, workList);
-        return  true;
-
+        try {
+            pdfHelper.createPdf(filepath, pdfpath, fontpath, work);
+            return new CommonResponse(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new CommonResponse(true);
     }
 }

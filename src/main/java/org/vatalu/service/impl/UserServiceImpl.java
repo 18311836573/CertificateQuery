@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
     public LoginResponse login(String userName, String password, HttpSession session) {
         User user = userMapper.findByName(userName);
         if (user != null || !(PasswordEncode.md5Encode(password + user.getSalt())).equals(user.getPassword())) {
-            session.setAttribute("login", "true");
             session.setAttribute("level", user.getLevel());
             session.setAttribute("userName", userName);
             return new LoginResponse(true, userName, user.getLevel());
