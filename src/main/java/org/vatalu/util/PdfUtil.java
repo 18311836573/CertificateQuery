@@ -12,36 +12,45 @@ import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import org.vatalu.model.entity.Work;
 
+@Component
+@PropertySource(value = "classpath:file.properties", encoding = "utf-8")
 public class PdfUtil {
-    private static final String source = "/certificate.pdf";
-    private static final String FONT1 = "/方正综艺简体.ttf";
-    private static final String FONT2 = "/方正小标宋_GBK.TTF";
 
-    public void createPdfs(String filepath, String pdfpath, String fontpath, List<Work> list) throws IOException {
+    @Value("${font1}")
+    private String font_1;
+
+    @Value("${font2}")
+    private String font_2;
+
+    @Value("${filepath}")
+    private String filepath;
+
+    @Value("${source}")
+    private String source;
+
+    public void createPdfs(List<Work> list) throws IOException {
         for (int i = 0; i < list.size(); i++) {
             Work work = list.get(i);
-            System.out.println(work.getNumber());
-            String filename = filepath + File.separator + PasswordEncode.md5Encode(work.getNumber()) + ".pdf";
-            System.out.println(filename);
-            File file = new File(filename);
-            if (file.exists() && file.isDirectory()) {
-                continue;
-            }
-            createPdf(filename, pdfpath, fontpath, work);
+            createPdf(work);
         }
     }
 
-    synchronized public void createPdf(String filename, String pdfpath, String fontpath, Work work) throws IOException {
+    synchronized public void createPdf(Work work) throws IOException {
+        String filename = filepath + PasswordEncode.md5Encode(work.getNumber()) + ".pdf";
+        File file = new File(filename);
         PdfWriter writer;
         PdfReader reader;
         writer = new PdfWriter(filename);
-        reader = new PdfReader(pdfpath + source);
+        reader = new PdfReader(source);
         PdfDocument pdf = new PdfDocument(reader, writer);
         Document document = new Document(pdf);
-        PdfFont font1 = PdfFontFactory.createFont(fontpath + FONT1, PdfEncodings.IDENTITY_H, false);
-        PdfFont font2 = PdfFontFactory.createFont(fontpath + FONT2, PdfEncodings.IDENTITY_H, false);
+        PdfFont font1 = PdfFontFactory.createFont(font_1, PdfEncodings.IDENTITY_H, false);
+        PdfFont font2 = PdfFontFactory.createFont(font_2, PdfEncodings.IDENTITY_H, false);
 
         Paragraph p1 = new Paragraph(work.getWorkname());
         p1.setFont(font2);

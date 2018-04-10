@@ -1,6 +1,8 @@
 package org.vatalu.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 
 @RestController
+@PropertySource(value = "classpath:file.properties", encoding = "utf-8")
 public class MailController {
     @Autowired
     private MailServiceImpl mailService;
@@ -20,17 +23,16 @@ public class MailController {
     @Autowired
     private DownloadServiceImpl downloadService;
 
+    @Value("${filepath}")
+    private String filepath;
+
     @PostMapping(value = "/mail", produces = "application/json;charset=utf-8")
     public CommonResponse sendMail(@RequestParam("number") String number,
-                                   @RequestParam("mailAccount") String receiveMailAccount,
-                                   HttpServletRequest request) {
-        String filepath = request.getServletContext().getRealPath(File.separator + "download");
-        String filename = filepath + File.separator + PasswordEncode.md5Encode(number) + ".pdf";
+                                   @RequestParam("mailAccount") String receiveMailAccount) {
+        String filename = filepath + PasswordEncode.md5Encode(number) + ".pdf";
         File file = new File(filename);
         if (!file.exists()) {
-            String pdfpath = request.getSession().getServletContext().getRealPath(File.separator + "pdfdemo");
-            String fontpath = request.getSession().getServletContext().getRealPath(File.separator + "font");
-            CommonResponse commonResponse = downloadService.getCertificatePdf(filepath, pdfpath, fontpath, number);
+            CommonResponse commonResponse = downloadService.getCertificatePdf( number);
             if (!commonResponse.getResult()){
                 return new CommonResponse(false);
             }

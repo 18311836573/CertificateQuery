@@ -1,6 +1,7 @@
 package org.vatalu.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.vatalu.map.WorkMapper;
@@ -17,12 +18,12 @@ import java.util.List;
 public class DownloadServiceImpl {
     @Autowired
     private WorkMapper workMapper;
-
-    public CommonResponse getCertificatePdf(String filepath, String pdfpath, String fontpath, String number) {
+    @Autowired
+    private PdfUtil pdfUtil;
+    public CommonResponse getCertificatePdf(String number) {
         Work work = workMapper.findByNumber(number);
-        PdfUtil pdfHelper = new PdfUtil();
         try {
-            pdfHelper.createPdf(filepath, pdfpath, fontpath, work);
+            pdfUtil.createPdf(work);
             return new CommonResponse(true);
         } catch (IOException e) {
             e.printStackTrace();
